@@ -1,0 +1,39 @@
+// Cas de base : Affectation et affichage
+A := {1,2,3}
+B := {4,5,6}
+C := {}
+
+// Opérations ensemblistes de base
+D := A union B
+E := A inter {2,3,4}
+F := A - B
+G := comp A
+H := card {1,2,3,3,4}
+
+// Expressions avec parenthèses et priorités d’opérateurs
+I := (A union B) inter {2,3,4,5}
+J := A inter (B union C)
+K := comp (A inter B)
+
+// Cas de copie d’ensemble
+L := A
+M := B
+
+//Tests d’égalité et d’inclusion (si implémentés)
+N := {1,2,3} = {1,2,3}
+O := {1,2} in {1,2,3,4}
+
+// Cas d’erreurs lexicales et syntaxiques
+P := {1,2,,3}  // Erreur : virgule en trop
+Q := {a,b,c}   // Erreur : caractères invalides
+R := card (A union B)  // Erreur : cardinalité sur une opération
+S := {1,2} union 3     // Erreur : mauvaise utilisation de `union`
+
+// Opérations avancées (si tu ajoutes les extensions)
+T := union({1,2}, {3,4}, {5,6})
+U := inter({1,2,3}, {2,3,4}, {3,4,5})
+
+// Test de performance (grand ensemble)
+V := {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63}
+
+

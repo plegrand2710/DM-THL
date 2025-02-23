@@ -1,0 +1,3 @@
+Ce répertoire est utilisé pour stocker les fichiers exécutables générés après compilation.
+
+L’exécutable final (set_interpreter) sera stocké ici. C’est le programme final compilé qui permet d’interpréter les expressions ensemblistes.

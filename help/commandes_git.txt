@@ -1,0 +1,78 @@
+Guide d'utilisation de Git
+
+--------------------------------------------------------------
+
+Initialiser un dépôt
+
+git init
+
+Configurer votre nom et email :
+git config --global user.name "Votre Nom"
+git config --global user.email "votre.email@example.com"
+
+--------------------------------------------------------------
+
+***Ajouter et valider des modifications***
+
+Ajouter un fichier :
+git add nom_du_fichier
+
+Ajouter tous les fichiers :
+git add .
+
+Créer un commit :
+git commit -m "Message"
+
+--------------------------------------------------------------
+
+***Gérer les branches***
+
+Créer une branche :
+git branch nom_branche
+
+Changer de branche :
+git checkout nom_branche
+
+Fusionner une branche :
+git merge nom_branche
+
+--------------------------------------------------------------
+
+***Dépôt distant***
+
+Pousser les changements :
+git push origin nom_branche
+
+Récupérer les changements :
+git pull origin nom_branche
+
+Cloner un dépôt :
+git clone url_du_depot
+
+--------------------------------------------------------------
+
+***Historique et modifications***
+
+Voir l'historique :
+git log
+
+Voir les différences :
+git diff
+
+--------------------------------------------------------------
+
+***Annuler des modifications***
+
+Retirer un fichier de la zone de staging :
+git reset nom_du_fichier
+
+Annuler un commit :
+git reset --soft HEAD~1 (garde les modifs)
+git reset --hard HEAD~1 (supprime les modifs)
+
+--------------------------------------------------------------
+
+***Mettre à jour votre branche locale avec les changements distants***
+
+Pour récupérer et fusionner les modifications depuis la branche distante :
+git pull origin nom_branche
