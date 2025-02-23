@@ -2,6 +2,10 @@
 
 %{
 #include "lexer.h"
+
+void printError(const char *msg) {
+    fprintf(stderr, "Erreur lexicale : %s\n", msg);
+}
 %}
 
 %%
