@@ -2,10 +2,13 @@
 
 %{
 #include "../include/lexer.h"
+#include "../include/proto-color.h"
+#ifdef FLEXALONE
 YYSTYPE yylval;
+#endif
 
 void printError(const char *msg) {
-    fprintf(stderr, "Erreur lexicale : %s\n", msg);
+    fprintf(stderr, RED("Erreur lexicale : %s\n"), msg);
 }
 %}
 
