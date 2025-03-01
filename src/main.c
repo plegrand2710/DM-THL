@@ -5,7 +5,6 @@
 //#include "exec.h"
 
 int main() {
-    printf("Interpréteur d'Expressions Ensemblistes\n");
     yyparse();
     return 0;
 }
