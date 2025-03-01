@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_SRC_YYPARSE_H_INCLUDED
-# define YY_YY_SRC_YYPARSE_H_INCLUDED
+#ifndef YY_YY_LEXER_TAB_BISON_INCLUDED
+# define YY_YY_LEXER_TAB_BISON_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -58,26 +58,14 @@ extern int yydebug;
     TOKEN_NEWLINE = 259,           /* TOKEN_NEWLINE  */
     TOKEN_ASSIGN = 260,            /* TOKEN_ASSIGN  */
     TOKEN_LBRACE = 261,            /* TOKEN_LBRACE  */
-    TOKEN_COMMA = 262,             /* TOKEN_COMMA  */
-    TOKEN_RBRACE = 263,            /* TOKEN_RBRACE  */
-    TOKEN_NUMBER = 264             /* TOKEN_NUMBER  */
+    TOKEN_NUMBER = 262             /* TOKEN_NUMBER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
-{
-#line 17 "src/lexer.bison"
- 
-    int num;     
-    char* id;    
-
-#line 78 "src/yyparse.h"
-
-};
-typedef union YYSTYPE YYSTYPE;
+typedef int YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -89,4 +77,4 @@ extern YYSTYPE yylval;
 int yyparse (void);
 
 
-#endif /* !YY_YY_SRC_YYPARSE_H_INCLUDED  */
+#endif /* !YY_YY_LEXER_TAB_BISON_INCLUDED  */

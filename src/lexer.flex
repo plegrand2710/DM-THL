@@ -2,7 +2,23 @@
 
 %{
 #ifdef FLEXALONE 
-  enum Return_Token_Values { TOKEN_IDENT = 1000, TOKEN_NEWLINE = '\n', TOKEN_ASSIGN = 2000 };
+YYSTYPE yylval;
+  enum Return_Token_Values {TOKEN_ANY = 1000, 
+			    TOKEN_UNKNOWN,
+			    TOKEN_ASSIGN,  
+			    TOKEN_UNION,  
+			    TOKEN_INTER,
+			    TOKEN_COMP,  
+			    TOKEN_DIFF,  
+			    TOKEN_CARD,   
+			    TOKEN_LBRACE,  
+			    TOKEN_RBRACE, 
+			    TOKEN_COMMA, 
+			    TOKEN_NEWLINE,
+			    TOKEN_NUMBER,  
+			    TOKEN_IDENT    
+    			   }
+    
 #else            
   #include "yyparse.h"  
 #endif
@@ -11,6 +27,14 @@
 %%
 ":="        { return TOKEN_ASSIGN; }
 [a-zA-Z]   { return TOKEN_IDENT; }
+"{"         { return TOKEN_LBRACE; }
+"}"         { return TOKEN_RBRACE; }
+[1-9]|[1-5][0-9]|6[0-3] { 
+    printf("TOKEN_NUMBER: %s\n", yytext); 
+    yylval.num = atoi(yytext); 
+    return TOKEN_NUMBER; 
+}
+","         { return TOKEN_COMMA; }
 [ \t]+     ;   /* Ignorer espaces et tabulations */
 \n          { return TOKEN_NEWLINE; }
 .           { return yytext[0]; }
