@@ -25,12 +25,16 @@ YYSTYPE yylval;
 %}
 
 %%
-":="        { return TOKEN_ASSIGN; }
-[a-zA-Z]   { return TOKEN_IDENT; }
-"{"         { return TOKEN_LBRACE; }
-"}"         { return TOKEN_RBRACE; }
+"union"     { printf("token union %s \n", yytext); return TOKEN_UNION; }
+"inter"     { printf("token inter %s \n", yytext); return TOKEN_INTER; }
+"comp"      { printf("token comp %s \n", yytext); return TOKEN_COMP; }
+"diff"      { printf("token diff %s \n", yytext); return TOKEN_DIFF; }
+"card"      { printf("token card %s \n", yytext); return TOKEN_CARD; }
+":="        { printf("token assign %s \n", yytext); return TOKEN_ASSIGN; }
+[a-zA-Z][a-zA-Z0-9]*    { printf("token ident %s \n", yytext); return TOKEN_IDENT; }
+"{"         { printf("token lbrace %s \n", yytext); return TOKEN_LBRACE; }
+"}"         { printf("token rbrace %s \n", yytext); return TOKEN_RBRACE; }
 [1-9]|[1-5][0-9]|6[0-3] { 
-    printf("TOKEN_NUMBER: %s\n", yytext); 
     yylval.num = atoi(yytext); 
     return TOKEN_NUMBER; 
 }

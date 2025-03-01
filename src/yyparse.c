@@ -75,8 +75,9 @@
 void yyerror(const char *s);
 int yylex(void);
 
+extern char *yytext;
 
-#line 80 "src/yyparse.c"
+#line 81 "src/yyparse.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -113,11 +114,17 @@ enum yysymbol_kind_t
   YYSYMBOL_TOKEN_LBRACE = 6,               /* TOKEN_LBRACE  */
   YYSYMBOL_TOKEN_COMMA = 7,                /* TOKEN_COMMA  */
   YYSYMBOL_TOKEN_RBRACE = 8,               /* TOKEN_RBRACE  */
-  YYSYMBOL_TOKEN_NUMBER = 9,               /* TOKEN_NUMBER  */
-  YYSYMBOL_YYACCEPT = 10,                  /* $accept  */
-  YYSYMBOL_input = 11,                     /* input  */
-  YYSYMBOL_expression = 12,                /* expression  */
-  YYSYMBOL_liste_nombres = 13              /* liste_nombres  */
+  YYSYMBOL_TOKEN_UNION = 9,                /* TOKEN_UNION  */
+  YYSYMBOL_TOKEN_INTER = 10,               /* TOKEN_INTER  */
+  YYSYMBOL_TOKEN_COMP = 11,                /* TOKEN_COMP  */
+  YYSYMBOL_TOKEN_DIFF = 12,                /* TOKEN_DIFF  */
+  YYSYMBOL_TOKEN_CARD = 13,                /* TOKEN_CARD  */
+  YYSYMBOL_TOKEN_NUMBER = 14,              /* TOKEN_NUMBER  */
+  YYSYMBOL_YYACCEPT = 15,                  /* $accept  */
+  YYSYMBOL_input = 16,                     /* input  */
+  YYSYMBOL_expression = 17,                /* expression  */
+  YYSYMBOL_ensemble = 18,                  /* ensemble  */
+  YYSYMBOL_liste_nombres = 19              /* liste_nombres  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -445,19 +452,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   8
+#define YYLAST   34
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  10
+#define YYNTOKENS  15
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  4
+#define YYNNTS  5
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  9
+#define YYNRULES  18
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  13
+#define YYNSTATES  32
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   264
+#define YYMAXUTOK   269
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -497,14 +504,15 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    28,    28,    30,    34,    35,    36,    37,    41,    42
+       0,    41,    41,    43,    44,    52,    53,    61,    62,    63,
+      64,    65,    66,    67,    68,    77,    78,    79,    83
 };
 #endif
 
@@ -522,8 +530,9 @@ static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "TOKEN_IDENT",
   "TOKEN_NEWLINE", "TOKEN_ASSIGN", "TOKEN_LBRACE", "TOKEN_COMMA",
-  "TOKEN_RBRACE", "TOKEN_NUMBER", "$accept", "input", "expression",
-  "liste_nombres", YY_NULLPTR
+  "TOKEN_RBRACE", "TOKEN_UNION", "TOKEN_INTER", "TOKEN_COMP", "TOKEN_DIFF",
+  "TOKEN_CARD", "TOKEN_NUMBER", "$accept", "input", "expression",
+  "ensemble", "liste_nombres", YY_NULLPTR
 };
 
 static const char *
@@ -533,12 +542,12 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-7)
+#define YYPACT_NINF (-6)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-1)
+#define YYTABLE_NINF (-7)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -547,8 +556,10 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -7,     0,    -7,    -1,     1,     2,    -7,    -3,    -7,    -6,
-      -2,    -7,    -7
+      -6,    21,    -6,    -3,    11,    19,    26,     2,    -6,    27,
+      18,     2,     2,    -5,    -6,    -6,     4,    22,    -6,     2,
+       2,     2,     2,    -1,    -6,    -5,    15,    17,    22,    -6,
+      -6,    -6
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -556,20 +567,22 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       2,     0,     1,     4,     0,     5,     3,     6,     8,     0,
-       0,     7,     9
+       2,     0,     1,     0,     0,     0,     4,     0,     3,     0,
+       0,     0,     0,     5,    14,    15,     0,    13,    12,     0,
+       0,     0,     0,     0,     7,     8,     9,    10,    11,    18,
+      17,    16
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -7,    -7,    -7,    -7
+      -6,    -6,    -6,    -2,    -6
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     1,     4,     9
+       0,     1,     5,    13,    16
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -577,32 +590,42 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       2,    10,    11,     3,     5,     6,     8,    12,     7
+      29,     6,    30,     9,    19,    20,    21,    22,    10,    17,
+      18,    23,    24,    31,    11,    12,     7,    25,    26,    27,
+      28,     2,     3,     8,     4,    20,    21,    22,    21,    22,
+      -6,    14,    15,     0,    22
 };
 
 static const yytype_int8 yycheck[] =
 {
-       0,     7,     8,     3,     5,     4,     9,     9,     6
+       1,     4,     3,     1,     9,    10,    11,    12,     6,    11,
+      12,     7,     8,    14,    12,    13,     5,    19,    20,    21,
+      22,     0,     1,     4,     3,    10,    11,    12,    11,    12,
+       4,     4,    14,    -1,    12
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    11,     0,     3,    12,     5,     4,     6,     9,    13,
-       7,     8,     9
+       0,    16,     0,     1,     3,    17,     4,     5,     4,     1,
+       6,    12,    13,    18,     4,    14,    19,    18,    18,     9,
+      10,    11,    12,     7,     8,    18,    18,    18,    18,     1,
+       3,    14
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    10,    11,    11,    12,    12,    12,    12,    13,    13
+       0,    15,    16,    16,    16,    17,    17,    18,    18,    18,
+      18,    18,    18,    18,    18,    19,    19,    19,    19
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     0,     3,     1,     2,     3,     5,     1,     3
+       0,     2,     0,     3,     3,     3,     2,     3,     3,     3,
+       3,     3,     2,     2,     2,     1,     3,     3,     3
 };
 
 
@@ -1065,44 +1088,113 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 4: /* expression: TOKEN_IDENT  */
-#line 34 "src/lexer.bison"
-                { printf("Expression syntaxiquement correcte.\n"); }
-#line 1072 "src/yyparse.c"
+  case 4: /* input: input error TOKEN_NEWLINE  */
+#line 44 "src/lexer.bison"
+                                { 
+        printf("❌ Erreur ignorée, passage à la ligne suivante.\n"); 
+        yyerrok; // Réinitialise l'état d'erreur
+    }
+#line 1098 "src/yyparse.c"
     break;
 
-  case 5: /* expression: TOKEN_IDENT TOKEN_ASSIGN  */
-#line 35 "src/lexer.bison"
-                               { printf("Assignment expression syntaxiquement correcte.\n"); }
-#line 1078 "src/yyparse.c"
+  case 5: /* expression: TOKEN_IDENT TOKEN_ASSIGN ensemble  */
+#line 52 "src/lexer.bison"
+                                      { printf("Expression d'assignation correcte.\n"); }
+#line 1104 "src/yyparse.c"
     break;
 
-  case 6: /* expression: TOKEN_IDENT TOKEN_ASSIGN TOKEN_LBRACE  */
-#line 36 "src/lexer.bison"
-                                            { printf("Assignment accolade expression syntaxiquement correcte.\n"); }
-#line 1084 "src/yyparse.c"
+  case 6: /* expression: error TOKEN_NEWLINE  */
+#line 53 "src/lexer.bison"
+                          { 
+        printf("❌ Erreur détectée dans une expression, passage à la ligne suivante.\n"); 
+        yyerrok;  // Réinitialisation de l'état d'erreur pour continuer
+    }
+#line 1113 "src/yyparse.c"
     break;
 
-  case 7: /* expression: TOKEN_IDENT TOKEN_ASSIGN TOKEN_LBRACE liste_nombres TOKEN_RBRACE  */
-#line 37 "src/lexer.bison"
-                                                                      { printf("Assignment accolade liste de valeurs accolade syntaxiquement correcte.\n"); }
-#line 1090 "src/yyparse.c"
+  case 7: /* ensemble: TOKEN_LBRACE liste_nombres TOKEN_RBRACE  */
+#line 61 "src/lexer.bison"
+                                            { printf("Ensemble détecté.\n"); }
+#line 1119 "src/yyparse.c"
     break;
 
-  case 8: /* liste_nombres: TOKEN_NUMBER  */
-#line 41 "src/lexer.bison"
-                 { printf("Nombre unique: %d\n", (yyvsp[0].num)); }
-#line 1096 "src/yyparse.c"
+  case 8: /* ensemble: ensemble TOKEN_UNION ensemble  */
+#line 62 "src/lexer.bison"
+                                    { printf("Union détectée.\n"); }
+#line 1125 "src/yyparse.c"
     break;
 
-  case 9: /* liste_nombres: liste_nombres TOKEN_COMMA TOKEN_NUMBER  */
-#line 42 "src/lexer.bison"
+  case 9: /* ensemble: ensemble TOKEN_INTER ensemble  */
+#line 63 "src/lexer.bison"
+                                    { printf("Intersection détectée.\n"); }
+#line 1131 "src/yyparse.c"
+    break;
+
+  case 10: /* ensemble: ensemble TOKEN_COMP ensemble  */
+#line 64 "src/lexer.bison"
+                                   { printf("Composition détectée.\n"); }
+#line 1137 "src/yyparse.c"
+    break;
+
+  case 11: /* ensemble: ensemble TOKEN_DIFF ensemble  */
+#line 65 "src/lexer.bison"
+                                   { printf("Différence détectée.\n"); }
+#line 1143 "src/yyparse.c"
+    break;
+
+  case 12: /* ensemble: TOKEN_CARD ensemble  */
+#line 66 "src/lexer.bison"
+                          { printf("Cardinalité détectée.\n"); }
+#line 1149 "src/yyparse.c"
+    break;
+
+  case 13: /* ensemble: TOKEN_DIFF ensemble  */
+#line 67 "src/lexer.bison"
+                          { printf("Différence détectée.\n"); }
+#line 1155 "src/yyparse.c"
+    break;
+
+  case 14: /* ensemble: error TOKEN_NEWLINE  */
+#line 68 "src/lexer.bison"
+                          { 
+        printf("❌ Erreur détectée dans un ensemble, passage à la ligne suivante.\n"); 
+        yyerrok;
+    }
+#line 1164 "src/yyparse.c"
+    break;
+
+  case 15: /* liste_nombres: TOKEN_NUMBER  */
+#line 77 "src/lexer.bison"
+                  { printf("Nombre unique: %d\n", (yyvsp[0].num)); }
+#line 1170 "src/yyparse.c"
+    break;
+
+  case 16: /* liste_nombres: liste_nombres TOKEN_COMMA TOKEN_NUMBER  */
+#line 78 "src/lexer.bison"
                                              { printf("Ajout du nombre: %d\n", (yyvsp[0].num)); }
-#line 1102 "src/yyparse.c"
+#line 1176 "src/yyparse.c"
+    break;
+
+  case 17: /* liste_nombres: liste_nombres TOKEN_COMMA TOKEN_IDENT  */
+#line 79 "src/lexer.bison"
+                                            { 
+    printf("❌ Erreur: Identifiant '%s' trouvé dans un ensemble au lieu d'un nombre.\n", yytext); 
+    yyerrok; 
+}
+#line 1185 "src/yyparse.c"
+    break;
+
+  case 18: /* liste_nombres: liste_nombres TOKEN_COMMA error  */
+#line 83 "src/lexer.bison"
+                                      { 
+        printf("❌ Erreur: Nombre manquant après une virgule.\n"); 
+        yyerrok; 
+    }
+#line 1194 "src/yyparse.c"
     break;
 
 
-#line 1106 "src/yyparse.c"
+#line 1198 "src/yyparse.c"
 
       default: break;
     }
@@ -1295,11 +1387,12 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 46 "src/lexer.bison"
+#line 91 "src/lexer.bison"
 
 
 void yyerror(const char *s) {
     fprintf(stderr, "Erreur: %s\n", s);
 }
+
 
 
