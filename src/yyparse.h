@@ -59,13 +59,15 @@ extern int yydebug;
     TOKEN_ASSIGN = 260,            /* TOKEN_ASSIGN  */
     TOKEN_LBRACE = 261,            /* TOKEN_LBRACE  */
     TOKEN_COMMA = 262,             /* TOKEN_COMMA  */
-    TOKEN_RBRACE = 263,            /* TOKEN_RBRACE  */
-    TOKEN_UNION = 264,             /* TOKEN_UNION  */
-    TOKEN_INTER = 265,             /* TOKEN_INTER  */
-    TOKEN_COMP = 266,              /* TOKEN_COMP  */
-    TOKEN_DIFF = 267,              /* TOKEN_DIFF  */
-    TOKEN_CARD = 268,              /* TOKEN_CARD  */
-    TOKEN_NUMBER = 269             /* TOKEN_NUMBER  */
+    TOKEN_RPARANT = 263,           /* TOKEN_RPARANT  */
+    TOKEN_LPARANT = 264,           /* TOKEN_LPARANT  */
+    TOKEN_RBRACE = 265,            /* TOKEN_RBRACE  */
+    TOKEN_UNION = 266,             /* TOKEN_UNION  */
+    TOKEN_INTER = 267,             /* TOKEN_INTER  */
+    TOKEN_COMP = 268,              /* TOKEN_COMP  */
+    TOKEN_DIFF = 269,              /* TOKEN_DIFF  */
+    TOKEN_CARD = 270,              /* TOKEN_CARD  */
+    TOKEN_NUMBER = 271             /* TOKEN_NUMBER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -74,12 +76,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 30 "src/lexer.bison"
+#line 40 "src/lexer.bison"
  
     int num;     
     char* id;    
 
-#line 83 "src/yyparse.h"
+#line 85 "src/yyparse.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
