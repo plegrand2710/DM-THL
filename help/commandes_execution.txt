@@ -3,7 +3,7 @@ se placer dans le dossier DM_THL
 flex et bison doivent etre dans src
 Makefile doit etre dans DM_THL
 compiler le flex et/ou le bison :
-make nom_fichier_flex_bison (si on veut la compilation des deux, il faut qu'ils aient le meme nom)
+make src/nom_fichier_flex_bison (si on veut la compilation des deux, il faut qu'ils aient le meme nom)
 executer le fichier compiler (créer dans src)
 ./src/nom_fichier_flex_bison
 si fichier de test (dans tests)
