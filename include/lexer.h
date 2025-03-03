@@ -21,12 +21,12 @@ enum Token {
     TOKEN_IDENT    // A-Z ou a-z
 };
 
-typedef union {
+/*typedef union {
     int num;       
     char ident[64];
-} YYSTYPE;
+} YYSTYPE;*/
 
-extern YYSTYPE yylval;
+//extern YYSTYPE yylval;
 
 int yylex(void);
 
