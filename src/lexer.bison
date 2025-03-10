@@ -61,6 +61,10 @@ expression:
     TOKEN_IDENT TOKEN_ASSIGN ensemble { 
         printf(GREEN("Expression d'assignation correcte.\n\n")); 
     }
+    | TOKEN_IDENT TOKEN_ASSIGN TOKEN_CARD ensemble {
+        printError("Erreur : Impossible d'affecter une valeur numérique à un ensemble.");
+        YYABORT;
+    }
     ;
 
 ensemble:
@@ -85,6 +89,10 @@ ensemble:
     | TOKEN_LPARANT ensemble TOKEN_RPARANT { 
         printf("Parenthèses détectées.\n");
     }
+    | TOKEN_CARD TOKEN_NUMBER {
+        printError("Erreur : card() doit être appliqué à un ensemble.");
+        YYABORT;
+    }
     ;
 
 liste_nombres:
@@ -97,4 +105,3 @@ liste_nombres:
     ;
 
 %%
-

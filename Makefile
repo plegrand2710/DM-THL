@@ -12,25 +12,23 @@
 
 USAGE ="USAGE :  \
 \n make XX  \
-\n    XX.flex => XX : Analyseur Lexical, si XX.bison absent  \
-\n    XX.flex + XX.bison => XX : Analyseur Syntaxique  \
-\n make lex-XX  \
-\n   XX.flex => lex-XX : Analyseur Lexical, meme si XX.bison existe  \
-\n make parse-XX  \
-\n    XX.flex + XX.bison => parse-XX : Analyseur Syntaxique  \
-\n make clean  \
-\n make all"
+    XX.flex => XX : Analyseur Lexical, si XX.bison absent  \
+    XX.flex + XX.bison => XX : Analyseur Syntaxique  \
+ make lex-XX  \
+   XX.flex => lex-XX : Analyseur Lexical, meme si XX.bison existe  \
+ make parse-XX  \
+    XX.flex + XX.bison => parse-XX : Analyseur Syntaxique  \
+ make clean  \
+ make all"
 
 CC=gcc
 CFLAGS= -Wall -I. 
 LEX=flex
 LFLAGS= 
 YACC=bison -d
-YFLAGS= 
+YFLAGS= -Wcounterexamples
 SRC=src
 BIN=bin
-YFLAGS = -Wcounterexamples
-
 
 ## default = help
 usage :
@@ -44,8 +42,7 @@ mon_analyseur : EXT_SRC = mes_extras.c ma_librairie.c -lm
 	@echo "Analyseur Syntaxique : $*.bison + $*.flex => $(BIN)/$@"
 	$(LEX) $(LFLAGS) -o $(SRC)/yylex.c $*.flex
 	$(YACC) $(YFLAGS) -o $(SRC)/yyparse.c $*.bison
-	$(CC) $(CFLAGS) -o $@ $(SRC)/yylex.c $(SRC)/yyparse.c $(SRC)/main.c $(EXT_SRC)
-
+	$(CC) $(CFLAGS) -o $@ $(SRC)/yylex.c $(SRC)/yyparse.c $(SRC)/main.c $(SRC)/semantic.c $(EXT_SRC)
 
 
 %  lex-% :: %.flex  
