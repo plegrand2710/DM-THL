@@ -9,3 +9,11 @@ executer le fichier compiler (créer dans src)
 si fichier de test (dans tests)
 ./src/nom_fichier_flex_bison < ./tests/fichier_de_test.extension
 
+
+Pour l'analyseur semantique :
+
+- se placer à la racine (DM-THL)
+
+- pour compiler : make src/parse-lexer
+- pour tester : ./src/parse-lexer < tests/test_semantic.txt
+

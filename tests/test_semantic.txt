@@ -1,0 +1,9 @@
+A := {1,2,3}
+B := A union {4,5}
+C := A inter {2,3}
+D := {1,2,3} comp {2,3}
+E := card {1,2,3,4}
+F := A - B
+G := card(A)  // Devrait afficher une erreur
+H := {1,2} inter 5  // Devrait afficher une erreur
+I := card 4  // Devrait afficher une erreur
