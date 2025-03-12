@@ -42,7 +42,7 @@ mon_analyseur : EXT_SRC = mes_extras.c ma_librairie.c -lm
 	@echo "Analyseur Syntaxique : $*.bison + $*.flex => $(BIN)/$@"
 	$(LEX) $(LFLAGS) -o $(SRC)/yylex.c $*.flex
 	$(YACC) $(YFLAGS) -o $(SRC)/yyparse.c $*.bison
-	$(CC) $(CFLAGS) -o $@ $(SRC)/yylex.c $(SRC)/yyparse.c $(SRC)/main.c $(SRC)/semantic.c $(EXT_SRC)
+	$(CC) $(CFLAGS) -o $@ $(SRC)/yylex.c $(SRC)/yyparse.c $(SRC)/main.c $(EXT_SRC)
 
 
 %  lex-% :: %.flex  
