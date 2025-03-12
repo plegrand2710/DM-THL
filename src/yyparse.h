@@ -76,7 +76,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 26 "src/lexerSemantique.bison"
+#line 26 "src/set_interpreter.bison"
 
         int num;     
     	char* id;  

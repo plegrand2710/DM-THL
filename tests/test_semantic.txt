@@ -1,6 +1,156 @@
 A := {1,2,3,4}
-B := A inter {2,3}
-C := {1,2,3} comp {2,3}
-D := A - B
-card {4,4,5,6,6}
-
+B := {5,6,7,8}
+C := {1,3,5,7}
+D := B
+E := A union B
+F := A inter C
+G := B - A
+H := C comp A
+I := (A union B inter C)
+J := A inter (B union C)
+K := (A union B) inter (C union D)
+L := A union (B inter C)
+M := (A union B) inter C
+N := A inter B inter C inter D
+O := (A union B) inter (C union D) - E
+P := A comp B comp C
+card {1,1,2,2,3}
+card {10,20,30,40,50,60}
+S := card A
+card B
+U := card {1,2,3,4,5,6,7,8,9,10}
+V := card (A union B)
+W := card (A inter B)
+X := A union B union C union D
+Y := A inter B inter C inter D
+Z := (A union B) inter (C union D) - E
+AA := A comp B comp C comp D
+AB := {1,2,3} inter {2,3,4} union {5,6,7}
+AC := (A inter B) union (C inter D) - (E union F)
+AD := {1,3,5} union {2,4,6} comp {3,4}
+AE := ((A union B) inter C) comp D
+AF := ((((A union B) inter C) comp D) - E) inter F
+AG := (((((A union B) comp C) - D) inter E) union F) comp G
+AH := (A union B) comp (C inter D) - (E comp F)
+AI := A union {1,2,3}
+AJ := {4,5,6} inter B
+AK := {1,2,3,4,5} - {4,5}
+AL := {1,2,3,4} comp {3,4}
+AM := (A inter B) - (C union D)
+AN := (A inter (B union C)) comp (D - E)
+AO := {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63}
+AP := card AO
+AQ := card {1}
+AR := card {63}
+AS := card {1,63}
+AT := A union B inter C
+AU := A inter (B union C)
+AV := (A union B) inter C
+AW := A inter B inter C inter D
+AX := (A union B) inter (C union D) - E
+AY := A comp B comp C
+AZ := {1,3,5} inter {2,4,6} union {5,6,7}
+BA := (A inter B) union (C inter D) - (E union F)
+BB := {1,3,5} union {2,4,6} comp {3,4}
+BC := ((A union B) inter C) comp D
+BD := ((((A union B) inter C) comp D) - E) inter F
+BE := (((((A union B) comp C) - D) inter E) union F) comp G
+BF := (A union B) comp (C inter D) - (E comp F)
+I := 123
+J := card A
+K := A := card(B)
+M := {1,2,3} 45
+N := {1,2,3} inter
+O := (A union
+P := A -
+Q := := {1,2,3}
+U := V inter {1,2,3}
+W := {1,2,3} union X
+Var1 := {10,20,30}
+abcXYZ := {1,2,3}
+123Var := {5,6,7}
+$var := {1,2,3}
+A B := {1,2,3}
+#var := {1,2,3}
+A-Var := {1,2,3}
+A@Var := {1,2,3}
+T1 := (A union B) inter C
+T2 := A union (B inter C)
+T3 := A inter B inter C inter D
+T4 := (A union B) inter (C union D) - E
+T5 := A comp B comp C
+B1 := {1,2,3
+B2 :=  
+B3 := (A inter
+B4 := A - B inter
+B5 := {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64}  
+B6 := card {}
+B7 := {1,2,3} - {4,5,6} comp {7,8} union {9,10,11} inter {12,13,14} -
+B8 := (A inter (B union C) - D comp 
+B9 := {1,2,3 
+B10 := (A union B) inter (C union D 
+B11 := {1,2,3} comp 45 
+B12 := {1,2,3} union {4,5,6} inter
+B13 := A - - B 
+B14 := {1,2,3} union {4,5,6} - {7,8,9} - 
+B15 := A := card(B union C) 
+AA := {10,20,30,40}
+BB := {15,25,35,45}
+CC := AA inter BB
+DD := {5,10,15,20,25,30} - {10,20,30}
+EE := {1,2,3} comp {3,4,5}
+FF := ((AA union BB) inter {15,25,35,45})
+GG := {1,2,3} inter {3,4,5} union {6,7,8}
+HH := {1,2,3} comp {3,4,5} - {5,6,7}
+II := ((AA union BB) inter {15,25,35,45}) - {15,25}
+JJ := card {1,2,3,4,5,6,7,8,9}
+KK := card (({1,2,3} union {4,5,6}) inter {1,4,7})
+LL := A union B union C union D union E
+MM := A inter (B union C inter D)
+NN := (A union (B inter C)) inter (D union E)
+OO := A comp (B comp C) union D
+PP := ((A union B) inter C) comp D
+QQ := ((((A union B) inter C) comp D) - E) inter F
+RR := (((((A union B) comp C) - D) inter E) union F) comp G
+SS := (A union B) comp (C inter D) - (E comp F)
+TT := (A inter B) inter (C inter D)
+UU := (A inter B) union (C inter D)
+VV := (A union B) - (C inter D)
+WW := card (A union B inter C)
+XX := {1,2,3,4,5,6,7,8,9,10} union {11,12,13,14,15,16,17,18,19,20}
+YY := (A union B) inter (C comp D)
+ZZ := ((A union B) inter C) comp D - E
+B17 := card {}
+B18 := A union B union 
+B19 := (A inter (B union C) - D comp 
+B20 := {1,2,3 
+B21 := (A union B) inter (C union D
+B22 := {1,2,3} comp 45
+B23 := {1,2,3} union {4,5,6} inter 
+B24 := A - - B 
+B25 := {1,2,3} union {4,5,6} - {7,8,9} - 
+B26 := card A B 
+B27 := {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65}  
+B28 := {1,2,3} inter {4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64}  
+B29 := A := B := C 
+B30 := := {1,2,3} 
+B31 := (A inter B 
+B32 := {1,2,3} inter card {2,3,4}
+B33 := card card {1,2,3}
+B34 := {1,2,3} inter {2,3,4} inter 
+B35 := card {1,2,3,4} union {5,6,7,8} 
+B36 := A := (B := {1,2,3}) 
+B37 := {1,2,3} - card {4,5,6} 
+B38 := (({1,2,3} inter {4,5,6})) card {1,2,3} 
+B39 := 123ABC := {1,2,3} 
+B40 := $VAR := {1,2,3} 
+B41 := {1,2,3} * {4,5,6} 
+B42 := {1,2,3} + {4,5,6} 
+B43 := A := card (B union C) 
+B44 := (A union B) inter (C union D) - 
+B45 := (A union B) - 
+B46 := A := card (B union C) inter D 
+B47 := A := card {1,2,3} inter B 
+B48 := A := (B union C inter) 
+B49 := A := (B union) inter C 
+B50 := A := (B inter C union) 

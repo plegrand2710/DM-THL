@@ -120,4 +120,75 @@ Après avoir détecté plusieurs **problèmes bloquants**, une **refonte de l’
 
 ---
 
+## 📌 Version 2.1 - [11/03/2025] Pauline
+
+### 🔹 **Finalisation de l'analyseur sémantique et ajustements**
+Cette version marque la **finalisation complète de l'analyseur sémantique**, assurant une gestion correcte des ensembles et des opérations ensemblistes.  
+Le fichier a été **renommé `set_interpreter`** pour coller aux exigences du projet et aux consignes.  
+
+L’implémentation repose **principalement sur le fichier `lexer.bison` développé dans la version précédente**, avec des corrections et des améliorations visant à stabiliser et optimiser l’exécution.  
+
+---
+
+### **🛠 Problèmes rencontrés et solutions apportées**
+#### **1️⃣ Correction de la gestion des erreurs et récupération après une erreur**
+🔴 **Problème** :  
+- Certaines erreurs interrompaient totalement l’analyse au lieu de simplement ignorer l'expression incorrecte.  
+- Un `TOKEN_NEWLINE` inattendu empêchait l’analyse des expressions suivantes.  
+
+🟢 **Solutions apportées** :  
+- **Ajout d'une gestion robuste des erreurs** avec `yyerrok; yyclearin;` pour éviter le blocage de l’analyse après une erreur.  
+- **Ajout d’une règle `error TOKEN_NEWLINE`** pour garantir que le parseur continue après une erreur de syntaxe.  
+
+---
+
+#### **2️⃣ Correction du calcul de `card`**
+🔴 **Problème** :  
+- `card {10,20,30,40,50,60}` retournait systématiquement une cardinalité de 3, peu importe l’ensemble.  
+- `card B` ne fonctionnait pas si `B` n'était pas encore défini.  
+
+🟢 **Solutions apportées** :  
+- **Correction de l’algorithme de calcul de cardinalité** pour compter correctement les éléments d’un ensemble en utilisant les opérations bit à bit.  
+- **Ajout d’une vérification de l'existence d'une variable avant d'évaluer `card IDENT`**.  
+
+---
+
+#### **3️⃣ Suppression du conflit `shift/reduce` sur `TOKEN_NEWLINE`**
+🔴 **Problème** :  
+- `TOKEN_NEWLINE` entraînait un conflit de type **réduction/réduction**, causé par l’ambiguïté entre `card {}` et `card IDENT`.  
+
+🟢 **Solution** :  
+- **Réorganisation de la grammaire et clarification de la règle `expression`** pour résoudre le conflit.  
+
+---
+
+#### **4️⃣ Vérification des priorités et des opérateurs**
+🔴 **Problème** :  
+- Les opérations `union`, `inter`, `comp`, `diff` ne respectaient pas toujours les priorités définies (`%left`, `%right`).  
+
+🟢 **Solution** :  
+- **Révision et consolidation des règles de priorité (`%left` pour `union`, `inter`, etc.)** pour garantir une bonne évaluation des expressions.  
+
+---
+
+### **📌 Fonctionnalités finales après correction**
+✅ **Correction de la gestion des erreurs et récupération après une erreur**.  
+✅ **Calcul correct de `card {}` et `card IDENT`**.  
+✅ **Suppression du conflit `shift/reduce`**.  
+✅ **Gestion propre des opérations ensemblistes avec respect des priorités**.  
+✅ **Renommage du fichier en `set_interpreter` pour respecter la consigne**.  
+
+---
+
+### **📌 Fonctionnalités non encore implémentées**
+❌ **Gestion des ensembles de plus de 64 éléments** (limité à 64 bits).  
+❌ **Opérations avancées (`A in B`, `A = B`)**.  
+❌ **Prise en charge des identificateurs complexes (`Var1`, `abcXYZ` fonctionnent, mais `123Var` pose problème).**  
+
+---
+
+## **📌 Prochaines étapes**
+✔ **Optimiser le calcul des ensembles pour améliorer les performances**.  
+✔ **Tester un plus grand nombre de cas limites pour valider la robustesse**.  
+✔ **Améliorer la gestion des erreurs pour les cas encore non couverts**.  
 

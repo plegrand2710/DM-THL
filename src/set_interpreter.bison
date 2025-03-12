@@ -17,7 +17,7 @@
     void printError(const char *message);
 
     int yyerror(const char *message) { 
-        fprintf(stderr, "❌ %s\n", message);
+        fprintf(stderr, "erreur : %s\n", message);
         return 0;
     }
     
@@ -61,74 +61,72 @@
     
     expression:
         TOKEN_IDENT TOKEN_ASSIGN ensemble { 
-	    int index = $1 ? $1[0] - 'A' : -1;  /* Vérifie que $1 n'est pas NULL */
-	    if (index < 0 || index >= MAX_VARS) {
-		printf("Identificateur d'ensemble invalide %s (%d) !\n", $1 ? $1 : "NULL", index);
-		YYABORT;
-	    }
-	    symbol_table[index] = $3; 
-	    printf("%s = ", $1 ? $1 : "NULL"); 
-	    printSet($3);
-	    if ($1) free($1);  /* Libération sécurisée */
-	}
-
-
-        | TOKEN_IDENT TOKEN_ASSIGN TOKEN_CARD ensemble { 
-            printError("Erreur : Impossible d'affecter une valeur numérique à un ensemble.");
-            YYABORT;
-        }
-        | TOKEN_CARD ensemble { 
-            printf("Cardinalité = %d\n", __builtin_popcountll($2));
-        }
-        | ensemble TOKEN_UNION ensemble { 
-            $$ = $1 | $3;
-        }
-        | ensemble TOKEN_INTER ensemble { 
-            $$ = $1 & $3;
-        }
-        | ensemble TOKEN_COMP ensemble { 
-            $$ = $1 ^ $3;
-        }
-        | ensemble TOKEN_DIFF ensemble { 
-            $$ = $1 & ~$3;
-        }
+			int index = $1 ? $1[0] - 'A' : -1; 
+			if (index < 0 || index >= MAX_VARS) {
+				printf("Identificateur d'ensemble invalide %s (%d) !\n", $1 ? $1 : "NULL", index);
+				yyerrok; 
+		        yyclearin;
+			}
+			symbol_table[index] = $3; 
+			printf("%s = ", $1 ? $1 : "NULL"); 
+			printSet($3);
+			if ($1) free($1); 
+		}
+        | TOKEN_IDENT TOKEN_ASSIGN TOKEN_CARD { 
+		    printError("Erreur : Impossible d'affecter une valeur numérique à un ensemble.");
+		    yyerrok; 
+		    yyclearin;
+		}
+		| TOKEN_CARD ensemble { 
+			int cardinality = 0;
+			Ensemble tmp = $2;
+			while (tmp) {
+				cardinality += tmp & 1;
+				tmp >>= 1;
+			}
+			printf("Cardinalité = %d\n", cardinality);
+		}
         ;
     
-    ensemble:
+ensemble:
     TOKEN_LBRACE liste_nombres TOKEN_RBRACE { 
         $$ = $2;
     }
     | TOKEN_IDENT { 
-        int index = $1[0] - 'A';  /* Prend la première lettre */
+        int index = $1[0] - 'A'; 
         if (index < 0 || index >= MAX_VARS) {
             printError("Variable inconnue !");
             YYABORT;
         }
         $$ = symbol_table[index]; 
-        if ($1) free($1);  /* Vérification avant de libérer */
+        if ($1) free($1);  
     }
     | ensemble TOKEN_UNION ensemble { 
-        $$ = $1 | $3;  /* Union des ensembles */
+        $$ = $1 | $3; 
         printf("Union détectée.\n");
     }
     | ensemble TOKEN_INTER ensemble { 
-        $$ = $1 & $3;  /* Intersection des ensembles */
+        $$ = $1 & $3;  
         printf("Intersection détectée.\n");
     }
     | ensemble TOKEN_COMP ensemble { 
-        $$ = $1 ^ $3;  /* Complémentaire des ensembles */
+        $$ = $1 ^ $3;  
         printf("Complémentaire détecté.\n");
     }
     | ensemble TOKEN_DIFF ensemble { 
-        $$ = $1 & ~$3;  /* Différence entre ensembles */
+        $$ = $1 & ~$3;  
         printf("Différence détectée.\n");
+    }
+    | TOKEN_LPARANT ensemble TOKEN_RPARANT { 
+        $$ = $2;
+        printf("Parenthèses respectées, application des priorités.\n");
     }
     ;
 
     
     liste_nombres:
         TOKEN_NUMBER { 
-            $$ = 1ULL << ($1 - 1);  // Active le bit correspondant à $1
+            $$ = 1ULL << ($1 - 1);
         }
         | liste_nombres TOKEN_COMMA TOKEN_NUMBER { 
             $$ = $1 | (1ULL << ($3 - 1));
@@ -147,6 +145,6 @@
                 first = 0;
             }
         }
-        printf("}\n");
+        printf("}\n\n\n");
     }
    

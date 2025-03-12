@@ -466,9 +466,9 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "src/lexerSemantique.flex"
+#line 1 "src/set_interpreter.flex"
 #define YY_NO_INPUT 1
-#line 4 "src/lexerSemantique.flex"
+#line 4 "src/set_interpreter.flex"
 #include "../include/proto-color.h"
 #include "ensemble.h"
 #ifdef FLEXALONE 
@@ -714,7 +714,7 @@ YY_DECL
 		}
 
 	{
-#line 35 "src/lexerSemantique.flex"
+#line 35 "src/set_interpreter.flex"
 
 #line 720 "src/yylex.c"
 
@@ -775,66 +775,66 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 36 "src/lexerSemantique.flex"
+#line 36 "src/set_interpreter.flex"
 { printf("TOKEN_UNION %s \n", yytext); return TOKEN_UNION; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 37 "src/lexerSemantique.flex"
+#line 37 "src/set_interpreter.flex"
 { printf("TOKEN_INTER %s \n", yytext); return TOKEN_INTER; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 38 "src/lexerSemantique.flex"
+#line 38 "src/set_interpreter.flex"
 { printf("TOKEN_COMP %s \n", yytext); return TOKEN_COMP; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 39 "src/lexerSemantique.flex"
+#line 39 "src/set_interpreter.flex"
 { printf("TOKEN_DIFF %s \n", yytext); return TOKEN_DIFF; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 40 "src/lexerSemantique.flex"
+#line 40 "src/set_interpreter.flex"
 { printf("TOKEN_CARD %s \n", yytext); return TOKEN_CARD; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 41 "src/lexerSemantique.flex"
+#line 41 "src/set_interpreter.flex"
 { printf("TOKEN_ASSIGN %s \n", yytext); return TOKEN_ASSIGN; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 42 "src/lexerSemantique.flex"
+#line 42 "src/set_interpreter.flex"
 { 
-    yylval.id = strdup(yytext);  /* Stocke la valeur dans yylval */
+    yylval.id = strdup(yytext); 
     printf("TOKEN_IDENT %s \n", yytext);
     return TOKEN_IDENT; 
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 48 "src/lexerSemantique.flex"
+#line 48 "src/set_interpreter.flex"
 { printf("TOKEN_LBRACE %s \n", yytext); return TOKEN_LBRACE; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 49 "src/lexerSemantique.flex"
+#line 49 "src/set_interpreter.flex"
 { printf("TOKEN_RBRACE %s \n", yytext); return TOKEN_RBRACE; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 50 "src/lexerSemantique.flex"
+#line 50 "src/set_interpreter.flex"
 { printf("TOKEN_LPARANT %s \n", yytext); return TOKEN_LPARANT; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 51 "src/lexerSemantique.flex"
+#line 51 "src/set_interpreter.flex"
 { printf("TOKEN_RPARANT %s \n", yytext); return TOKEN_RPARANT; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 52 "src/lexerSemantique.flex"
+#line 52 "src/set_interpreter.flex"
 { 
     printf("TOKEN_NUMBER %s \n", yytext);
     yylval.num = atoi(yytext); 
@@ -843,28 +843,28 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 57 "src/lexerSemantique.flex"
+#line 57 "src/set_interpreter.flex"
 { printf("TOKEN_COMMA %s \n", yytext); return TOKEN_COMMA; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 58 "src/lexerSemantique.flex"
-;   /* Ignorer espaces et tabulations */
+#line 58 "src/set_interpreter.flex"
+;   
 	YY_BREAK
 case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
-#line 59 "src/lexerSemantique.flex"
+#line 59 "src/set_interpreter.flex"
 { printf("TOKEN_NEWLINE %s \n", yytext); return TOKEN_NEWLINE; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 60 "src/lexerSemantique.flex"
+#line 60 "src/set_interpreter.flex"
 { printError(yytext); return yytext[0]; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 61 "src/lexerSemantique.flex"
+#line 61 "src/set_interpreter.flex"
 ECHO;
 	YY_BREAK
 #line 871 "src/yylex.c"
@@ -1835,7 +1835,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 61 "src/lexerSemantique.flex"
+#line 61 "src/set_interpreter.flex"
 
 
 int yywrap(void) { return 1; }

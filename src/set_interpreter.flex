@@ -40,7 +40,7 @@ void printError(const char *msg) {
 "card"      { printf("TOKEN_CARD %s \n", yytext); return TOKEN_CARD; }
 ":="        { printf("TOKEN_ASSIGN %s \n", yytext); return TOKEN_ASSIGN; }
 [a-zA-Z][a-zA-Z0-9]* { 
-    yylval.id = strdup(yytext);  /* Stocke la valeur dans yylval */
+    yylval.id = strdup(yytext); 
     printf("TOKEN_IDENT %s \n", yytext);
     return TOKEN_IDENT; 
 }
@@ -55,7 +55,7 @@ void printError(const char *msg) {
     return TOKEN_NUMBER; 
 }
 ","         { printf("TOKEN_COMMA %s \n", yytext); return TOKEN_COMMA; }
-[ \t]+     ;   /* Ignorer espaces et tabulations */
+[ \t]+     ;   
 \n          { printf("TOKEN_NEWLINE %s \n", yytext); return TOKEN_NEWLINE; }
 .           { printError(yytext); return yytext[0]; }
 %%
