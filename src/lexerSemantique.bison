@@ -4,31 +4,49 @@
     #include <string.h>
     #include <stdint.h>
     
-    #define MAX_VARS 26  // Stockage des ensembles de A à Z
+    #include "ensemble.h" 
     
-    typedef uint64_t Ensemble;  // Un ensemble est représenté par un uint64_t (64 bits)
-    Ensemble symbol_table[MAX_VARS] = {0};  // Table des symboles
+    #define MAX_VARS 26 
+        
+    Ensemble symbol_table[MAX_VARS] = {0};  
     
-    void printError(const char *message); 
-    void printSet(Ensemble e);  // Fonction pour afficher un ensemble
+    extern int yylex();
+    extern char *yytext;
+    void printSet(Ensemble e);  
+
+    void printError(const char *message);
+
+    int yyerror(const char *message) { 
+        fprintf(stderr, "❌ %s\n", message);
+        return 0;
+    }
     
     %}
     
     %union {
         int num;     
-        char id;
+    	char* id;  
         Ensemble set;
     }
     
-    /* Déclaration des tokens */
-    %token TOKEN_IDENT TOKEN_NEWLINE TOKEN_ASSIGN TOKEN_LBRACE TOKEN_COMMA TOKEN_RBRACE
-    %token TOKEN_UNION TOKEN_INTER TOKEN_COMP TOKEN_DIFF TOKEN_CARD TOKEN_NUMBER
+    %define parse.error verbose
+    
+
+    %token TOKEN_IDENT TOKEN_NEWLINE TOKEN_ASSIGN TOKEN_LBRACE TOKEN_COMMA TOKEN_RBRACE TOKEN_LPARANT TOKEN_RPARANT
+    %token TOKEN_UNION TOKEN_INTER TOKEN_COMP TOKEN_DIFF TOKEN_CARD
     
     %type <set> ensemble expression
     %type <num> liste_nombres
     %type <id> TOKEN_IDENT
     %token <num> TOKEN_NUMBER
     
+    %right TOKEN_ASSIGN     
+    %left TOKEN_UNION       
+    %left TOKEN_INTER     
+    %left TOKEN_COMP       
+    %left TOKEN_DIFF     
+
+
     %%
     
     input:
@@ -43,10 +61,18 @@
     
     expression:
         TOKEN_IDENT TOKEN_ASSIGN ensemble { 
-            symbol_table[$1 - 'A'] = $3; 
-            printf("%c = ", $1); 
-            printSet($3);
-        }
+	    int index = $1 ? $1[0] - 'A' : -1;  /* Vérifie que $1 n'est pas NULL */
+	    if (index < 0 || index >= MAX_VARS) {
+		printf("Identificateur d'ensemble invalide %s (%d) !\n", $1 ? $1 : "NULL", index);
+		YYABORT;
+	    }
+	    symbol_table[index] = $3; 
+	    printf("%s = ", $1 ? $1 : "NULL"); 
+	    printSet($3);
+	    if ($1) free($1);  /* Libération sécurisée */
+	}
+
+
         | TOKEN_IDENT TOKEN_ASSIGN TOKEN_CARD ensemble { 
             printError("Erreur : Impossible d'affecter une valeur numérique à un ensemble.");
             YYABORT;
@@ -69,13 +95,36 @@
         ;
     
     ensemble:
-        TOKEN_LBRACE liste_nombres TOKEN_RBRACE { 
-            $$ = $2;
+    TOKEN_LBRACE liste_nombres TOKEN_RBRACE { 
+        $$ = $2;
+    }
+    | TOKEN_IDENT { 
+        int index = $1[0] - 'A';  /* Prend la première lettre */
+        if (index < 0 || index >= MAX_VARS) {
+            printError("Variable inconnue !");
+            YYABORT;
         }
-        | TOKEN_IDENT { 
-            $$ = symbol_table[$1 - 'A']; 
-        }
-        ;
+        $$ = symbol_table[index]; 
+        if ($1) free($1);  /* Vérification avant de libérer */
+    }
+    | ensemble TOKEN_UNION ensemble { 
+        $$ = $1 | $3;  /* Union des ensembles */
+        printf("Union détectée.\n");
+    }
+    | ensemble TOKEN_INTER ensemble { 
+        $$ = $1 & $3;  /* Intersection des ensembles */
+        printf("Intersection détectée.\n");
+    }
+    | ensemble TOKEN_COMP ensemble { 
+        $$ = $1 ^ $3;  /* Complémentaire des ensembles */
+        printf("Complémentaire détecté.\n");
+    }
+    | ensemble TOKEN_DIFF ensemble { 
+        $$ = $1 & ~$3;  /* Différence entre ensembles */
+        printf("Différence détectée.\n");
+    }
+    ;
+
     
     liste_nombres:
         TOKEN_NUMBER { 
@@ -87,10 +136,6 @@
         ;
     
     %%
-    
-    void printError(const char *message) {
-        fprintf(stderr, "❌ %s\n", message);
-    }
     
     void printSet(Ensemble e) {
         printf("{");
@@ -104,5 +149,4 @@
         }
         printf("}\n");
     }
-    
-    int main(void) { return yyparse(); }
+   

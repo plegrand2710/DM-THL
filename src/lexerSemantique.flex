@@ -2,6 +2,7 @@
 
 %{
 #include "../include/proto-color.h"
+#include "ensemble.h"
 #ifdef FLEXALONE 
 YYSTYPE yylval;
   enum Return_Token_Values {TOKEN_ANY = 1000, 
@@ -35,10 +36,15 @@ void printError(const char *msg) {
 "union"     { printf("TOKEN_UNION %s \n", yytext); return TOKEN_UNION; }
 "inter"     { printf("TOKEN_INTER %s \n", yytext); return TOKEN_INTER; }
 "comp"      { printf("TOKEN_COMP %s \n", yytext); return TOKEN_COMP; }
-"diff"      { printf("TOKEN_DIFF %s \n", yytext); return TOKEN_DIFF; }
+"-"      { printf("TOKEN_DIFF %s \n", yytext); return TOKEN_DIFF; }
 "card"      { printf("TOKEN_CARD %s \n", yytext); return TOKEN_CARD; }
 ":="        { printf("TOKEN_ASSIGN %s \n", yytext); return TOKEN_ASSIGN; }
-[a-zA-Z][a-zA-Z0-9]*    { printf("TOKEN_IDENT %s \n", yytext); return TOKEN_IDENT; }
+[a-zA-Z][a-zA-Z0-9]* { 
+    yylval.id = strdup(yytext);  /* Stocke la valeur dans yylval */
+    printf("TOKEN_IDENT %s \n", yytext);
+    return TOKEN_IDENT; 
+}
+
 "{"         { printf("TOKEN_LBRACE %s \n", yytext); return TOKEN_LBRACE; }
 "}"         { printf("TOKEN_RBRACE %s \n", yytext); return TOKEN_RBRACE; }
 "("         { printf("TOKEN_LPARANT %s \n", yytext); return TOKEN_LPARANT; }
