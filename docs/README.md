@@ -73,11 +73,9 @@ Le projet devra être développé sur **GitHub**, avec des commits réguliers do
 - **GitHub** pour le suivi et le versionnement du projet.
 
 ### 🏗️ **Architecture du Code**
-- `lexer.flex` : Définition des tokens et analyse lexicale.
-- `parser.y` : Implémentation de la grammaire et analyse syntaxique.
+- `set_interpreter.flex` : Définition des tokens et analyse lexicale.
+- `set_interpreter.bison` : Implémentation de la grammaire et analyse syntaxique.
 - `main.c` : Gestion de l'entrée utilisateur et exécution des expressions.
-- `set_operations.c/h` : Fonctions pour manipuler les ensembles avec des opérations bit à bit.
-- `error_handling.c/h` : Fonctions de gestion des erreurs.
 
 ---
 
@@ -87,8 +85,8 @@ Le projet devra être développé sur **GitHub**, avec des commits réguliers do
   - Fichiers sources du projet.
   - **Makefile** permettant de compiler et exécuter l'interpréteur :
     ```bash
-    $ make set_interpreter
-    $ ./set_interpreter < fichier_test.txt
+    $ make ./src/set_interpreter
+    $ ./src/set_interpreter < ./src/test_interpreter.data
     ```
   - **Rapport (5 pages max)** expliquant les choix techniques et les difficultés rencontrées.
 
