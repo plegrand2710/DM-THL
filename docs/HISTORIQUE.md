@@ -192,3 +192,42 @@ L’implémentation repose **principalement sur le fichier `lexer.bison` dévelo
 ✔ **Tester un plus grand nombre de cas limites pour valider la robustesse**.  
 ✔ **Améliorer la gestion des erreurs pour les cas encore non couverts**.  
 
+---
+
+## 📌 Version 3.0 - [14/03/2025] **Pauline**
+### 🔹 **Finalisation complète du projet**
+L’analyseur lexical et syntaxique est maintenant **stable et fonctionnel**. Toutes les fonctionnalités prévues ont été **implémentées et validées** par des **tests rigoureux**.
+
+---
+
+### **🛠 Dernières corrections et tests effectués**
+#### **1️⃣ Détection des erreurs lexicales**
+- **Ajout de 50 tests spécifiques** pour **détecter les erreurs lexicales**.
+- **Amélioration des erreurs dans `lexer.flex`**, avec des **messages explicites**.
+
+#### **2️⃣ Amélioration de la gestion des erreurs syntaxiques**
+- **Ajout de 50 tests** pour **vérifier les ensembles et leurs affectations**.
+- **Correction des règles de grammaire** pour mieux reconnaître les ensembles.
+
+#### **3️⃣ Vérification complète des opérations ensemblistes**
+- **Ajout de 50 tests sur les opérations (`union`, `inter`, `comp`, `diff`)**.
+
+#### **4️⃣ Gestion améliorée des expressions complexes**
+- **Ajout du support pour `A := {card B, card C}`**.
+- **Ajout de 50 tests pour valider la gestion des expressions complexes**.
+
+---
+
+### 📌 **Finalisation et validation complète du projet**
+✔ **Détection et gestion correcte des erreurs lexicales et syntaxiques**.  
+✔ **Toutes les opérations ensemblistes sont testées et validées**.  
+✔ **La gestion de `card` est correcte et conforme aux attentes**.  
+✔ **Tous les tests passent avec succès**.  
+✔ **Le projet est terminé.**  
+
+---
+
+### 📌 **Conclusion**
+Le projet est **finalisé et fonctionnel**. L’analyseur lexical et syntaxique fonctionne **sans erreur**, et toutes les fonctionnalités ont été **testées et validées**.
+
+📌 **Fin du développement - 14/03/2025** 🚀✅

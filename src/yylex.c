@@ -776,67 +776,67 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 36 "src/set_interpreter.flex"
-{ printf("TOKEN_UNION %s \n", yytext); return TOKEN_UNION; }
+{ /*printf("TOKEN_UNION %s \n", yytext);*/ return TOKEN_UNION; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 37 "src/set_interpreter.flex"
-{ printf("TOKEN_INTER %s \n", yytext); return TOKEN_INTER; }
+{ /*printf("TOKEN_INTER %s \n", yytext);*/ return TOKEN_INTER; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 38 "src/set_interpreter.flex"
-{ printf("TOKEN_COMP %s \n", yytext); return TOKEN_COMP; }
+{ /*printf("TOKEN_COMP %s \n", yytext);*/ return TOKEN_COMP; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 39 "src/set_interpreter.flex"
-{ printf("TOKEN_DIFF %s \n", yytext); return TOKEN_DIFF; }
+{ /*printf("TOKEN_DIFF %s \n", yytext);*/ return TOKEN_DIFF; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 40 "src/set_interpreter.flex"
-{ printf("TOKEN_CARD %s \n", yytext); return TOKEN_CARD; }
+{ /*printf("TOKEN_CARD %s \n", yytext);*/ return TOKEN_CARD; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 41 "src/set_interpreter.flex"
-{ printf("TOKEN_ASSIGN %s \n", yytext); return TOKEN_ASSIGN; }
+{ /*printf("TOKEN_ASSIGN %s \n", yytext);*/ return TOKEN_ASSIGN; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 42 "src/set_interpreter.flex"
 { 
     yylval.id = strdup(yytext); 
-    printf("TOKEN_IDENT %s \n", yytext);
+    /*printf("TOKEN_IDENT %s \n", yytext);*/
     return TOKEN_IDENT; 
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 48 "src/set_interpreter.flex"
-{ printf("TOKEN_LBRACE %s \n", yytext); return TOKEN_LBRACE; }
+{ /*printf("TOKEN_LBRACE %s \n", yytext);*/ return TOKEN_LBRACE; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 49 "src/set_interpreter.flex"
-{ printf("TOKEN_RBRACE %s \n", yytext); return TOKEN_RBRACE; }
+{ /*printf("TOKEN_RBRACE %s \n", yytext);*/ return TOKEN_RBRACE; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 50 "src/set_interpreter.flex"
-{ printf("TOKEN_LPARANT %s \n", yytext); return TOKEN_LPARANT; }
+{ /*printf("TOKEN_LPARANT %s \n", yytext);*/ return TOKEN_LPARANT; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 51 "src/set_interpreter.flex"
-{ printf("TOKEN_RPARANT %s \n", yytext); return TOKEN_RPARANT; }
+{ /*printf("TOKEN_RPARANT %s \n", yytext);*/ return TOKEN_RPARANT; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 52 "src/set_interpreter.flex"
 { 
-    printf("TOKEN_NUMBER %s \n", yytext);
+    /*printf("TOKEN_NUMBER %s \n", yytext);*/
     yylval.num = atoi(yytext); 
     return TOKEN_NUMBER; 
 }
@@ -844,7 +844,7 @@ YY_RULE_SETUP
 case 13:
 YY_RULE_SETUP
 #line 57 "src/set_interpreter.flex"
-{ printf("TOKEN_COMMA %s \n", yytext); return TOKEN_COMMA; }
+{ /*printf("TOKEN_COMMA %s \n", yytext);*/ return TOKEN_COMMA; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
@@ -855,7 +855,7 @@ case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
 #line 59 "src/set_interpreter.flex"
-{ printf("TOKEN_NEWLINE %s \n", yytext); return TOKEN_NEWLINE; }
+{ /*printf("TOKEN_NEWLINE %s \n", yytext);*/ return TOKEN_NEWLINE; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
