@@ -96,7 +96,8 @@ ensemble:
         int index = $1[0] - 'A'; 
         if (index < 0 || index >= MAX_VARS) {
             printError("Variable inconnue !");
-            YYABORT;
+            yyerrok; 
+		    yyclearin;
         }
         $$ = symbol_table[index]; 
         if ($1) free($1);  
@@ -131,7 +132,40 @@ ensemble:
         | liste_nombres TOKEN_COMMA TOKEN_NUMBER { 
             $$ = $1 | (1ULL << ($3 - 1));
         }
-        ;
+        | TOKEN_CARD TOKEN_IDENT {
+		int index = $2[0] - 'A';
+		if (index < 0 || index >= MAX_VARS || symbol_table[index] == 0) {
+		    printError("Erreur : Utilisation de card sur un ensemble non défini.");
+		    yyerrok; 
+		    yyclearin;
+		} else {
+		    int cardinality = 0;
+		    Ensemble tmp = symbol_table[index];
+		    while (tmp) {
+		        cardinality += tmp & 1;
+		        tmp >>= 1;
+		    }
+		    $$ = 1ULL << (cardinality - 1);
+		}
+	    }
+		| liste_nombres TOKEN_COMMA TOKEN_CARD TOKEN_IDENT {
+		    int index = $4[0] - 'A';
+		    if (index < 0 || index >= MAX_VARS || symbol_table[index] == 0) {
+		        printError("Erreur : Utilisation de card sur un ensemble non défini.");
+		        yyerrok; 
+		    	yyclearin;
+		    } else {
+		        int cardinality = 0;
+		        Ensemble tmp = symbol_table[index];
+		        while (tmp) {
+		            cardinality += tmp & 1;
+		            tmp >>= 1;
+		        }
+		        $$ = $1 | (1ULL << (cardinality - 1));
+		    }
+		}
+		;
+        
     
     %%
     
