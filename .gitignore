@@ -50,3 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Ignorer les fichiers générés par Flex
+lex.yy.c
+lexer

@@ -1,0 +1,37 @@
+A := {1,2,3} union {4,5,6}
+B := {7,8} inter {8,9}
+C := {10,11,12} comp {11}
+D := card {1,1,2,2,3}
+E := {1,2,3} diff {2,3}
+F := comp {1,2,3,4,5}
+G := card {10,20,30}
+H := {5,10,15} inter {10,15,20} union {5,25,30}
+I := comp {1,2,3} inter {2,3,4} union {1,5,6}
+J := {1,2,3,4} diff {2,3} union {5,6}
+K := {10} inter {20}
+L := card {1} union {2,3}
+M := {1,2,3} union {4,5,6} inter {6,7,8}
+N := card card {1,2,3,4,5}
+O := comp comp {1,2,3}
+P := {1,2,3} inter ({2,3} union {4,5})
+Q := card {1,2,3,4} inter {1,2}
+R := {1,2,3 union {4,5,6} 
+S := {1,2,} 
+T := {,1,2,3}
+U := {1,2 3}
+V := {1 2,3}
+W := card A
+X := {1,2,3} card {4,5,6}
+Y := 42
+Z := A union B
+AA := {1,2,3} := {4,5,6}
+BB := card {1,2,3} comp {4,5,6}
+CC := {1,2,3} diff
+DD := {1,2,3} inter 5
+EE := {1,2,3 4,5,6}
+FF := {1,2,3} comp 5
+GG := {1,2,3} union union {4,5,6}
+HH := comp comp comp {1,2,3}
+II := {1,2,3 inter {4,5,6}
+JJ := card {1,2,3,}
+

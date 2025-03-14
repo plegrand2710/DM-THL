@@ -1,4 +1,4 @@
-#include "exec.h"
+// #include "exec.h"
 
 /* Implémentation de l'exécution des expressions ensemblistes */
 
